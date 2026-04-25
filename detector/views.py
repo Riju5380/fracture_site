@@ -8,7 +8,10 @@ from django.shortcuts import render
 from ultralytics import YOLO
 
 # Load model once
-model = YOLO("best.pt")
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+model_path = os.path.join(BASE_DIR, "best.pt")
+
+model = YOLO(model_path)
 
 def index(request):
     result_img = None
