@@ -1,8 +1,10 @@
-django==4.2.13
+Django==4.2.13
 gunicorn
 ultralytics
-torch
-torchvision
-pillow
-numpy
 opencv-python-headless
+pillow
+whitenoise
+
+torch==2.2.2+cpu
+torchvision==0.17.2+cpu
+--extra-index-url https://download.pytorch.org/whl/cpu
