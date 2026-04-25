@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Bone Fracture Detection</title>
+<style>
+    body {
+        font-family: Arial;
+        background: linear-gradient(to right, #e6f0ff, #ffffff);
+        text-align: center;
+    }
+
+    .container {
+        margin-top: 60px;
+    }
+
+    h1 {
+        color: #007bff;
+        font-size: 32px;
+    }
+
+    .subtitle {
+        color: #555;
+        margin-bottom: 20px;
+    }
+
+    input[type="file"] {
+        margin-top: 10px;
+    }
+
+    button {
+        background: #007bff;
+        color: white;
+        padding: 12px 25px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background: #0056b3;
+    }
+
+    .loader {
+        display: none;
+        margin-top: 15px;
+        color: #007bff;
+        font-weight: bold;
+    }
+
+    .result-box {
+        margin-top: 30px;
+    }
+
+    .result-text {
+        font-size: 28px;
+        font-weight: bold;
+        color: #007bff;
+    }
+
+    img {
+        margin-top: 15px;
+        width: 350px;
+        border: 3px solid #007bff;
+        border-radius: 10px;
+    }
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Bone Fracture Detection</h1>
+<p class="subtitle">Upload an X-ray image to detect fractures</p>
+<p class="subtitle">It will predict which kind od fracture you have in your bone. It can predict fractures like</p>
+<p> Comminuted, Greenstick, Healthy, Linear, Oblique Displaced, Oblique, Segmental, Spiral, Transverse Displaced, Transverse</p>
+
+<form method="POST" enctype="multipart/form-data" onsubmit="showLoader()">
+    {% csrf_token %}
+    <input type="file" name="image" required>
+    <br><br>
+    <button type="submit">Upload & Detect</button>
+</form>
+
+<div class="loader" id="loader">Processing Image...</div>
+
+{% if result_img %}
+    <div class="result-box">
+        <div class="result-text">Detection Result</div>
+        <img src="data:image/jpeg;base64,{{ result_img }}">
+    </div>
+{% endif %}
+
+</div>
+
+<script>
+    function showLoader() {
+        document.getElementById("loader").style.display = "block";
+    }
+</script>
+
+</body>
+</html>

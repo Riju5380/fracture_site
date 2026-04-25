@@ -1,0 +1,1 @@
+web: gunicorn fracture_site.wsgi
